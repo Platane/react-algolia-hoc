@@ -1,0 +1,53 @@
+{
+  "name": "react-algolia-hoc",
+  "version": "0.1.0",
+  "description": "Simple higher order component for algolia search",
+  "main": "lib/index.js",
+  "files": [
+    "lib/"
+  ],
+  "dependencies": {
+    "algoliasearch": "3.24.8",
+    "babel-plugin-transform-runtime": " 6.23.0",
+    "react": ">=16",
+    "react-dom": ">=16"
+  },
+  "peerDependencies": {
+    "algoliasearch": ">=3.24",
+    "react": ">=15",
+    "react-dom": ">=15"
+  },
+  "devDependencies": {
+    "babel-cli": "6.26.0",
+    "babel-core": "6.26.0",
+    "babel-jest": "22.0.0",
+    "babel-loader": "7.1.2",
+    "babel-plugin-transform-class-properties": "6.24.1",
+    "babel-plugin-transform-object-rest-spread": "6.26.0",
+    "babel-preset-env": "1.6.1",
+    "babel-preset-flow": "6.23.0",
+    "babel-preset-react": "6.24.1",
+    "emotion": "8.0.12",
+    "enzyme": "3.2.0",
+    "enzyme-adapter-react-16": "1.1.0",
+    "file-loader": "1.1.6",
+    "flow-bin": "0.61.0",
+    "jest": "22.0.0",
+    "prettier": "1.9.2",
+    "react-emotion": "8.0.12",
+    "react-simplest-typeahead": "1.0.0",
+    "webpack": "3.10.0",
+    "webpack-dev-server": "2.9.7"
+  },
+  "jest": {
+    "testMatch": [
+      "**/__tests__/**/*.(spec|test).js"
+    ]
+  },
+  "scripts": {
+    "start": "NODE_ENV=demo webpack-dev-server --inline --devtool source-map -d --config ./src/__tests__/demo/webpack.config.js",
+    "build:demo": "NODE_ENV=demo webpack --config ./src/__tests__/demo/webpack.config.js",
+    "test": "NODE_ENV=test jest --verbose",
+    "build": "rm -rf lib && NODE_ENV=production babel --out-dir ./lib --ignore '**/__tests__/' ./src "
+  }
+}

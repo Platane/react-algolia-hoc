@@ -1,0 +1,53 @@
+{
+  "plugins": ["transform-class-properties", "transform-object-rest-spread"],
+  "presets": ["react", "flow"],
+
+  "env": {
+    "production": {
+      "plugins": ["transform-class-properties", "transform-object-rest-spread"],
+      "presets": [
+        [
+          "env",
+          {
+            "targets": { "browsers": ["last 2 versions", "IE 10"] }
+          }
+        ]
+      ]
+    },
+    "test": {
+      "presets": [
+        [
+          "env",
+          {
+            "targets": { "node": ["8.9"] }
+          }
+        ]
+      ]
+    },
+    "demo": {
+      "plugins": [
+        "emotion",
+        "transform-class-properties",
+        "transform-object-rest-spread",
+        [
+          "transform-runtime",
+          {
+            "helpers": false,
+            "polyfill": false,
+            "regenerator": true,
+            "moduleName": "babel-runtime"
+          }
+        ],
+        "transform-async-to-generator"
+      ],
+      "presets": [
+        [
+          "env",
+          {
+            "targets": { "browsers": ["last 2 versions", "IE 10"] }
+          }
+        ]
+      ]
+    }
+  }
+}
