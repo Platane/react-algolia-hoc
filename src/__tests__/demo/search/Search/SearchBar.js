@@ -1,7 +1,6 @@
 import React from 'react'
 import { Typeahead } from 'react-simplest-typeahead'
-import { StarCount } from './StarCount'
-import { withAlgolia } from '../../../index'
+import { StarCount } from '../StarCount'
 import styled, { css } from 'react-emotion'
 
 const renderOption = ({ option, isHighlighted, ...props }) => (
@@ -27,14 +26,7 @@ const Option = styled.div`
     props.isHighlighted ? 'rgba(128,128,128,0.3)' : 'transparent'};
 `
 
-const SearchTypeahead = ({
-  value,
-  query,
-  onQueryChange,
-  hits,
-  onChange,
-  ...props
-}) => (
+export const SearchBar = ({ value, onChange, hits, query, onQueryChange }) => (
   <Typeahead
     value={value && value.title}
     pattern={query}
@@ -53,8 +45,6 @@ const customClassName = {
     border-radius: 40px;
     background-color: #fff;
     padding: 15px 50px;
-    width: 80%;
-    max-width: 700px;
     box-shadow: 20px 20px 40px -10px rgba(0, 0, 0, 0.3);
   `,
   input: css`
@@ -67,11 +57,3 @@ const customClassName = {
     width: calc(100% - 100px) !important;
   `,
 }
-
-const config = {
-  indexName: 'movie',
-  ALGOLIA_APP_ID: 'V4D8I8W4EI',
-  ALGOLIA_API_KEY: '2812ccac3c1c922221c16cf495d0b5f8',
-}
-
-export const Search = withAlgolia(config)(SearchTypeahead)

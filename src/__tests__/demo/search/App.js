@@ -16,10 +16,10 @@ injectGlobal`
   }
 `
 
-export class App extends React.Component {
+export class App extends React.Component<{}, { movie: Object | null }> {
   state = { movie: null }
 
-  onChange = movie => this.setState({ movie })
+  onChange = (movie: Object) => this.setState({ movie })
 
   render() {
     const x = (this.state.movie && this.state.movie.id) || 0
@@ -36,6 +36,7 @@ export class App extends React.Component {
     )
   }
 }
+
 const Body = styled.div`
   display: flex;
   flex-direction: column;
