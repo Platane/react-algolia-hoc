@@ -1,22 +1,19 @@
 import React from 'react'
 import { Typeahead } from 'react-simplest-typeahead'
-import { StarCount } from './StarCount'
-import { withAlgolia } from '../../../index'
+import { withAlgoliaPlaces } from '../../../index'
+import { parseAddress } from '../../../util/parseAddress'
+
 import styled, { css } from 'react-emotion'
 
+const formatAddress = ({ street, city }) => street + ', ' + city
+
 const renderOption = ({ option, isHighlighted, ...props }) => (
-  <Option {...props} key={option.id} isHighlighted={isHighlighted}>
-    <Title>{option.title}</Title>
-    <Stars count={+option.vote_average} />
+  <Option {...props} key={option.objectID} isHighlighted={isHighlighted}>
+    <Icon />
+    {formatAddress(parseAddress(option))}
   </Option>
 )
 
-const Stars = styled(StarCount)`
-  width: 100px;
-  height: 20px;
-  margin-left: auto;
-`
-const Title = styled.div``
 const Option = styled.div`
   display: flex;
   flex-direction: row;
@@ -27,7 +24,16 @@ const Option = styled.div`
     props.isHighlighted ? 'rgba(128,128,128,0.3)' : 'transparent'};
 `
 
-const SearchTypeahead = ({
+const Icon = () => (
+  <svg
+    viewBox="0 0 100 100"
+    style={{ width: '20px', height: '20px', margin: '0 10px' }}
+  >
+    <path d="M48.9 0A36 36 0 0 0 16 50.7C25 70.3 42.3 91 47.3 97a2 2 0 0 0 3 0 227 227 0 0 0 31.4-46.3A36 36 0 0 0 48.9 0zm0 54.7a18.7 18.7 0 1 1 0-37.5 18.7 18.7 0 0 1 0 37.5z" />
+  </svg>
+)
+
+const SearchPlacesTypeahead = ({
   value,
   query,
   onQueryChange,
@@ -36,7 +42,7 @@ const SearchTypeahead = ({
   ...props
 }) => (
   <Typeahead
-    value={value && value.title}
+    value={value && formatAddress(parseAddress(value))}
     pattern={query}
     options={hits}
     onChange={onChange}
@@ -68,10 +74,4 @@ const customClassName = {
   `,
 }
 
-const config = {
-  indexName: 'movie',
-  ALGOLIA_APP_ID: 'V4D8I8W4EI',
-  ALGOLIA_API_KEY: '2812ccac3c1c922221c16cf495d0b5f8',
-}
-
-export const Search = withAlgolia(config)(SearchTypeahead)
+export const Places = withAlgoliaPlaces()(SearchPlacesTypeahead)

@@ -8,6 +8,10 @@ module.exports = {
       path.join(__dirname, './search/index.js'),
       path.join(__dirname, './search/search.html'),
     ],
+    'index-places': [
+      path.join(__dirname, './places/index.js'),
+      path.join(__dirname, './places/places.html'),
+    ],
   },
   output: {
     path: path.join(__dirname, './dist'),

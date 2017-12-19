@@ -13,7 +13,7 @@ export type Props = {
   index: string,
 }
 
-export type Option = {
+export type Config = {
   indexName?: string,
   ALGOLIA_APP_ID: string,
   ALGOLIA_API_KEY: string,
@@ -23,7 +23,7 @@ export const withAlgolia = ({
   indexName,
   ALGOLIA_APP_ID,
   ALGOLIA_API_KEY,
-}: Option) => (C: React.Component) =>
+}: Config = {}) => (C: React.Component) =>
   class SearchState extends React.Component {
     static defaultProps = {
       indexName: indexName,
@@ -44,11 +44,11 @@ export const withAlgolia = ({
     }
 
     componentDidMount() {
-      this.onQuerySearch('')
+      this.onQueryChange('')
     }
 
     onChange = (...args) => {
-      this.onQuerySearch('')
+      this.onQueryChange('')
       this.props.onChange && this.props.onChange(...args)
     }
 
@@ -69,7 +69,7 @@ export const withAlgolia = ({
       this.setState({ pending: false, hits })
     }
 
-    onQuerySearch = (query: string) => {
+    onQueryChange = (query: string) => {
       this.setState({ pending: true, query }, this.doDebouncedSearch)
     }
 
@@ -83,7 +83,7 @@ export const withAlgolia = ({
           {...this.props}
           {...this.state}
           onChange={this.onChange}
-          onQuerySearch={this.onQuerySearch}
+          onQueryChange={this.onQueryChange}
           onFiltersChange={this.onFiltersChange}
         />
       )
