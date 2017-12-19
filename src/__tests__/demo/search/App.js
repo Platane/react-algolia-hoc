@@ -41,7 +41,7 @@ const Body = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  padding-top: 60px;
   height: 100%;
   overflow: hidden;
   transition: background-color 300ms ease;
