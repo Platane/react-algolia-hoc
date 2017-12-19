@@ -16,19 +16,15 @@ injectGlobal`
   }
 `
 
-export class App extends React.Component {
+export class App extends React.Component<*, { address: Object | null }> {
   state = { address: null }
 
-  onChange = address => this.setState({ address })
+  onChange = (address: Object | null) => this.setState({ address })
 
   render() {
     return (
       <Body>
-        <Places
-          onChange={this.onChange}
-          value={this.state.address}
-          useDeviceLocation
-        />
+        <Places onChange={this.onChange} value={this.state.address} />
         <AlgoliaPowered src={algolia_logo} />
       </Body>
     )

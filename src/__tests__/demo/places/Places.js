@@ -74,4 +74,9 @@ const customClassName = {
   `,
 }
 
-export const Places = withAlgoliaPlaces()(SearchPlacesTypeahead)
+const config = {
+  useDeviceLocation: true,
+  hitsPerPage: 5,
+}
+
+export const Places = withAlgoliaPlaces(config)(SearchPlacesTypeahead)

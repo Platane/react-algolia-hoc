@@ -1,14 +1,9 @@
-
-export const debounce = ( delay:number = 0 ) => ( fn : (*) => void ) => {
+export const debounce = (delay: number = 0) => (fn: Function) => {
   let pending = null
-  let _args = []
 
-  const exec = () => fn(..._args)
-
-  const out = (...args : *) => {
-    _args = args
+  const out = () => {
     clearTimeout(pending)
-    pending = setTimeout(exec, delay)
+    pending = setTimeout(fn, delay)
   }
 
   out.cancel = () => clearTimeout(pending)

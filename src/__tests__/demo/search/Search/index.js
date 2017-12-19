@@ -32,6 +32,8 @@ const Container = styled.div`
 `
 
 const config = {
+  hitsPerPage: 10,
+  delay: 100,
   indexName: 'movie',
   ALGOLIA_APP_ID: 'V4D8I8W4EI',
   ALGOLIA_API_KEY: '2812ccac3c1c922221c16cf495d0b5f8',
