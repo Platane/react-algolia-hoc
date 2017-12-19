@@ -1,9 +1,25 @@
+/**
+ * this helpers convert a object filter to a string which can be understood by algolia
+ *
+ * it use this transformation :
+ *
+ * filter : {
+ *   a : 1,
+ *   b : [ 2, 3, 4 ]
+ * }
+ *
+ * ==>
+ *
+ * ( a === 1 ) && ( b === 2 OR b === 3 OR b === 4 )
+ *
+ */
+
 type Filters = { [string]: string[] | string }
 
 export const parseFilter = (x: string): Filters => {
   const filter = {}
 
-  const r = /([\w\.\-]+):([\w\.\-]+)/g
+  const r = /([\w\.\-]+):"([^"]+)"/g
   let m
 
   while ((m = r.exec(x))) {
@@ -18,7 +34,7 @@ export const formatFilter = (x: Filters): string =>
   Object.keys(x)
     .map(key =>
       (Array.isArray(x[key]) ? x[key] : [x[key]])
-        .map(value => `${key}:${value}`)
+        .map(value => `${key}:"${value}"`)
         .join(' OR ')
     )
     .map(p => `( ${p} )`)
