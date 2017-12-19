@@ -10,7 +10,8 @@ export type State = {
 }
 
 export type Props = {
-  index: string,
+  index?: string,
+  onChange?: (*) => void,
 }
 
 export type Config = {
@@ -24,7 +25,7 @@ export const withAlgolia = ({
   ALGOLIA_APP_ID,
   ALGOLIA_API_KEY,
 }: Config = {}) => (C: React.Component) =>
-  class SearchState extends React.Component {
+  class SearchState extends React.Component<Props, State> {
     static defaultProps = {
       indexName: indexName,
     }
@@ -33,7 +34,7 @@ export const withAlgolia = ({
 
     state: State = { pending: false, filters: null, hits: [], query: '' }
 
-    constructor(props) {
+    constructor(props: Props) {
       super(props)
 
       const client = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY)
@@ -49,7 +50,7 @@ export const withAlgolia = ({
 
     onChange = (...args) => {
       this.onQueryChange('')
-      this.props.onChange && this.props.onChange(...args)
+      if (this.props.onChange) this.props.onChange(...args)
     }
 
     doSearch = async () => {
@@ -73,7 +74,7 @@ export const withAlgolia = ({
       this.setState({ pending: true, query }, this.doDebouncedSearch)
     }
 
-    onFiltersChange = (filters: Filters) => {
+    onFiltersChange = (filters: string) => {
       this.setState({ pending: true, filters }, this.doSearch)
     }
 

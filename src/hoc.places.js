@@ -30,7 +30,7 @@ export const withAlgoliaPlaces = ({
   PLACES_APPID,
   hitsPerPage,
 }: Config = {}) => C =>
-  class SearchState extends React.Component {
+  class SearchState extends React.Component<Props, State> {
     static defaultProps = {
       language: 'en',
       useDeviceLocation: false,
@@ -41,7 +41,7 @@ export const withAlgoliaPlaces = ({
 
     _places = null
 
-    constructor(props) {
+    constructor(props: Props) {
       super(props)
       this._places = algoliasearch.initPlaces(PLACES_APPID, PLACES_APIKEY)
 
@@ -70,7 +70,7 @@ export const withAlgoliaPlaces = ({
 
     onChange = (...args) => {
       this.onQueryChange('')
-      this.props.onChange && this.props.onChange(...args)
+      if (this.props.onChange) this.props.onChange(...args)
     }
 
     doSearch = async () => {
