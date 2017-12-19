@@ -34,8 +34,10 @@ export const formatFilter = (x: Filters): string =>
   Object.keys(x)
     .map(key =>
       (Array.isArray(x[key]) ? x[key] : [x[key]])
+        .filter(Boolean)
         .map(value => `${key}:"${value}"`)
         .join(' OR ')
     )
+    .filter(Boolean)
     .map(p => `( ${p} )`)
     .join(' AND ')

@@ -4,6 +4,9 @@ import { parseFilter, formatFilter } from '../parseFilter'
 it('should parse / format empty filter', () => {
   expect(parseFilter('')).toEqual({})
   expect(parseFilter(formatFilter({}))).toEqual({})
+
+  expect(formatFilter({})).toEqual('')
+  expect(formatFilter({ a: [] })).toEqual('')
 })
 
 it('should parse / format basic filter', () => {
