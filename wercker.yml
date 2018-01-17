@@ -32,3 +32,9 @@ deploy-pages:
     - takuma7/gh-pages:
         token: $GH_TOKEN
         basedir: gh-pages
+
+publish-npm:
+  steps:
+    - turistforeningen/npm-publish:
+      # need NPM_TOKEN env var set
+      name: publish to npm
