@@ -2,9 +2,9 @@ import React from 'react'
 import { debounce } from './util/debounce'
 import algoliasearch from 'algoliasearch'
 
-const getUserCoord = () =>
-  new Promise((reject, resolve) =>
-    navigator.geolocation.getCurrentPosition(resolve, reject)
+const getUserCoord = (): Promise<{ latitude: number, longitude: number }> =>
+  new Promise((resolve, reject) =>
+    navigator.geolocation.getCurrentPosition(x => resolve(x.coords), reject)
   )
 
 export type State = {
