@@ -4,13 +4,21 @@ const webpack = require('webpack')
 
 module.exports = {
   entry: {
-    'index-search': [
-      path.join(__dirname, './search/index.js'),
-      path.join(__dirname, './search/search.html'),
+    'index-search-fancy': [
+      path.join(__dirname, './search-fancy/index.js'),
+      path.join(__dirname, './search-fancy/search-fancy.html'),
     ],
-    'index-places': [
-      path.join(__dirname, './places/index.js'),
-      path.join(__dirname, './places/places.html'),
+    'index-places-fancy': [
+      path.join(__dirname, './places-fancy/index.js'),
+      path.join(__dirname, './places-fancy/places-fancy.html'),
+    ],
+    'index-search-basic': [
+      path.join(__dirname, './search-basic/index.js'),
+      path.join(__dirname, './search-basic/search-basic.html'),
+    ],
+    'index-places-basic': [
+      path.join(__dirname, './places-basic/index.js'),
+      path.join(__dirname, './places-basic/places-basic.html'),
     ],
   },
   output: {

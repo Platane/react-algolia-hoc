@@ -22,7 +22,7 @@ export class App extends React.Component<{}, { movie: Object | null }> {
   onChange = (movie: Object) => this.setState({ movie })
 
   render() {
-    const x = (this.state.movie && this.state.movie.id) || 0
+    const x = (this.state.movie && this.state.movie.objectID) || 0
 
     return (
       <Body

@@ -4,24 +4,24 @@ import { parseFilter, formatFilter } from '../../../../util/parseFilter'
 import styled, { css } from 'react-emotion'
 
 const filtersOptions = [
-  'Drama', //2297,
-  'Comedy', //1722,
-  'Thriller', //1274,
-  'Action', //1154,
-  'Romance', //894,
-  'Adventure', //790,
-  'Crime', //696,
-  'Science Fiction', //535,
-  'Horror', //519,
-  'Family', //513,
-  'Fantasy', //424,
-  'Mystery', //348,
-  'Animation', //234,
-  'History', //197,
-  'Music', //185,
-  'War', //144,
-  'Documentary', //110,
-  'Western', //82,
+  'Drama',
+  'Comedy',
+  'Thriller',
+  'Action',
+  'Romance',
+  'Adventure',
+  'Crime',
+  'Science Fiction',
+  'Horror',
+  'Family',
+  'Fantasy',
+  'Mystery',
+  'Animation',
+  'History',
+  'Music',
+  'War',
+  'Documentary',
+  'Western',
 ]
 
 const renderItem = ({ item, onDelete }) => (
@@ -46,17 +46,23 @@ const Item = styled.div`
 
 const FilteredTokenizer = injectFilterState()(Tokenizer)
 
-const format = genres => formatFilter({ genres: genres })
-const parse = filters => parseFilter(filters)['genres'] || []
+const format = genre => formatFilter({ genre: genre })
+const parse = filters => parseFilter(filters)['genre'] || []
 
-export const Filter = ({ filters, onFiltersChange }) => (
+export const Filter = ({
+  filters,
+  onFiltersChange,
+}: {
+  filters: string,
+  onFiltersChange: (filters: string) => void,
+}) => (
   <FilteredTokenizer
     options={filtersOptions}
     value={parse(filters)}
     customClassName={customClassName}
     renderItem={renderItem}
-    onChange={genres => onFiltersChange(format(genres))}
-    placeholder="by genres"
+    onChange={genre => onFiltersChange(format(genre))}
+    placeholder="by genre"
   />
 )
 

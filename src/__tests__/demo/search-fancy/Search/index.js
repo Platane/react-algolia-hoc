@@ -19,7 +19,10 @@ const SearchComponent = ({
     <SearchBar
       hits={hits}
       value={value}
-      onChange={onChange}
+      onChange={x => {
+        onChange(x)
+        onQueryChange('')
+      }}
       query={query}
       onQueryChange={onQueryChange}
     />
@@ -34,9 +37,9 @@ const Container = styled.div`
 const config = {
   hitsPerPage: 10,
   delay: 100,
-  indexName: 'movie',
-  ALGOLIA_APP_ID: 'V4D8I8W4EI',
-  ALGOLIA_API_KEY: '2812ccac3c1c922221c16cf495d0b5f8',
+  indexName: 'movies',
+  ALGOLIA_APP_ID: 'latency',
+  ALGOLIA_API_KEY: '6be0576ff61c053d5f9a3225e2a90f76',
 }
 
 export const Search = withAlgolia(config)(SearchComponent)

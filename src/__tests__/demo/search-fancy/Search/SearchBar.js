@@ -1,19 +1,34 @@
 import React from 'react'
 import { Typeahead } from 'react-simplest-typeahead'
-import { withAlgoliaPlaces } from '../../../index'
-import { parseAddress } from '../../../util/parseAddress'
-
+import { StarCount } from '../StarCount'
 import styled, { css } from 'react-emotion'
-
-const formatAddress = ({ street, city }) => street + ', ' + city
 
 const renderOption = ({ option, isHighlighted, ...props }) => (
   <Option {...props} key={option.objectID} isHighlighted={isHighlighted}>
-    <Icon />
-    {formatAddress(parseAddress(option))}
+    <Title>{option.title}</Title>
+    <Genres>
+      {option.genre
+        .slice(0, 3)
+        .map(genre => <Genre key={genre}>{genre}</Genre>)}
+    </Genres>
+    <Stars count={+option.score} />
   </Option>
 )
 
+const Genres = styled.div``
+const Genre = styled.span`
+  font-size: 0.8em;
+  padding: 4px 2px;
+  margin: 2px;
+  background-color: #eee;
+  border-radius: 2px;
+`
+const Stars = styled(StarCount)`
+  width: 100px;
+  height: 20px;
+  margin-left: auto;
+`
+const Title = styled.div``
 const Option = styled.div`
   display: flex;
   flex-direction: row;
@@ -24,25 +39,9 @@ const Option = styled.div`
     props.isHighlighted ? 'rgba(128,128,128,0.3)' : 'transparent'};
 `
 
-const Icon = () => (
-  <svg
-    viewBox="0 0 100 100"
-    style={{ width: '20px', height: '20px', margin: '0 10px' }}
-  >
-    <path d="M48.9 0A36 36 0 0 0 16 50.7C25 70.3 42.3 91 47.3 97a2 2 0 0 0 3 0 227 227 0 0 0 31.4-46.3A36 36 0 0 0 48.9 0zm0 54.7a18.7 18.7 0 1 1 0-37.5 18.7 18.7 0 0 1 0 37.5z" />
-  </svg>
-)
-
-const SearchPlacesTypeahead = ({
-  value,
-  query,
-  onQueryChange,
-  hits,
-  onChange,
-  ...props
-}) => (
+export const SearchBar = ({ value, onChange, hits, query, onQueryChange }) => (
   <Typeahead
-    value={value && formatAddress(parseAddress(value))}
+    value={value && value.title}
     pattern={query}
     options={hits}
     onChange={onChange}
@@ -59,8 +58,6 @@ const customClassName = {
     border-radius: 40px;
     background-color: #fff;
     padding: 15px 50px;
-    width: 80%;
-    max-width: 700px;
     box-shadow: 20px 20px 40px -10px rgba(0, 0, 0, 0.3);
   `,
   input: css`
@@ -73,10 +70,3 @@ const customClassName = {
     width: calc(100% - 100px) !important;
   `,
 }
-
-const config = {
-  useDeviceLocation: true,
-  hitsPerPage: 5,
-}
-
-export const Places = withAlgoliaPlaces(config)(SearchPlacesTypeahead)
