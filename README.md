@@ -15,8 +15,8 @@ Some examples with fancy styling
 
 ... or others more bare bone with less noise.
 
-* [search movies basic](https://platane.github.io/react-algolia-hoc/search-basic.html)
-* [search address basic](https://platane.github.io/react-algolia-hoc/places-basic.html)
+* [search movies basic](https://platane.github.io/react-algolia-hoc/search-basic.html) - (_source code [here](https://github.com/Platane/react-algolia-hoc/blob/master/src/__tests__/demo/search-basic/App.js) )_
+* [search address basic](https://platane.github.io/react-algolia-hoc/places-basic.html) - (_source code [here](https://github.com/Platane/react-algolia-hoc/blob/master/src/__tests__/demo/places-basic/App.js) )_
 
 # Motivation
 
