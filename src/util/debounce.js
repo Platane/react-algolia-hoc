@@ -1,5 +1,5 @@
 export const debounce = (delay: number = 0) => (fn: Function) => {
-  let pending = null
+  let pending: TimeoutID
 
   const out = () => {
     clearTimeout(pending)

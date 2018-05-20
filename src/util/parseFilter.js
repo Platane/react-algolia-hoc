@@ -14,7 +14,8 @@
  *
  */
 
-type Filters = { [string]: string[] | string }
+type Filters = { [string]: string[] }
+type Filters_Loose = { [string]: string[] | string }
 
 export const parseFilter = (x: string): Filters => {
   const filter = {}
@@ -30,7 +31,7 @@ export const parseFilter = (x: string): Filters => {
   return filter
 }
 
-export const formatFilter = (x: Filters): string =>
+export const formatFilter = (x: Filters_Loose): string =>
   Object.keys(x)
     .map(key =>
       (Array.isArray(x[key]) ? x[key] : [x[key]])

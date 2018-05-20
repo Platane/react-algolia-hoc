@@ -1,6 +1,6 @@
 export type Address = {
   street: string,
-  city: string,
+  city: ?string,
   postcode: string,
   country: string,
   geoloc: {

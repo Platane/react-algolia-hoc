@@ -1,6 +1,7 @@
 import React from 'react'
 import { debounce } from './util/debounce'
 import algoliasearch from 'algoliasearch'
+import type { ComponentType } from 'react'
 
 const getUserCoord = (): Promise<{ latitude: number, longitude: number }> =>
   new Promise((resolve, reject) =>
@@ -18,7 +19,6 @@ export type Props = {
   language?: string,
   hitsPerPage?: number,
   useDeviceLocation?: boolean,
-  onChange?: (o: Object) => void,
 }
 
 export type Config = {
@@ -30,20 +30,27 @@ export type Config = {
   PLACES_APIKEY?: string,
 }
 
+export type AlgoliaParam = {
+  hitsPerPage?: number,
+  query?: string,
+  page?: number,
+  language?: string,
+  aroundLatLng?: string,
+  type?: string,
+}
+
 export const withAlgoliaPlaces = ({
   PLACES_APIKEY,
   PLACES_APPID,
-  hitsPerPage,
-  delay,
-  language,
-  useDeviceLocation,
+  ...c
 }: Config = {}) => {
   // parse option
-  delay = Number.isFinite(delay) ? delay : 100
-  hitsPerPage = Number.isFinite(hitsPerPage) ? hitsPerPage : 20
-  useDeviceLocation = useDeviceLocation === true
+  const delay = c.delay !== undefined ? c.delay : 100
+  const hitsPerPage = c.hitsPerPage !== undefined ? c.hitsPerPage : 20
+  const useDeviceLocation = c.useDeviceLocation === true
+  const language = c.language || 'en'
 
-  return C =>
+  return (C: ComponentType<*>) =>
     class SearchState extends React.Component<Props, State> {
       static defaultProps = {
         hitsPerPage,
@@ -51,9 +58,11 @@ export const withAlgoliaPlaces = ({
         language: language || 'en',
       }
 
-      state: State = { pending: false, hits: [], query: '', userCoord: null }
+      _places: * = null
 
-      _places = null
+      doDebouncedSearch: * = null
+
+      state: State = { pending: false, hits: [], query: '', userCoord: null }
 
       constructor(props: Props) {
         super(props)
@@ -63,14 +72,13 @@ export const withAlgoliaPlaces = ({
       }
 
       async getDeviceLocation() {
-        try {
-          const { latitude, longitude } = await getUserCoord()
-          if (latitude && longitude)
-            this.setState({ userCoord: `${latitude},${longitude}` })
-        } catch (err) {
+        const { latitude, longitude } = await getUserCoord()
           // silent error,
           // which can happend for various reason, moslty because the geoloc is not implemented in this env
-        }
+          .catch(err => ({}))
+
+        if (latitude && longitude)
+          this.setState({ userCoord: `${latitude},${longitude}` })
       }
 
       componentDidMount() {
@@ -78,29 +86,26 @@ export const withAlgoliaPlaces = ({
       }
 
       componentWillUnmount() {
-        this.setState({ query: '' })
+        // this.setState({ query: '' })
         this.doDebouncedSearch.cancel()
-      }
-
-      onChange = (...args: *) => {
-        this.onQueryChange('')
-        if (this.props.onChange) this.props.onChange(...args)
       }
 
       doSearch = async () => {
         const { query, userCoord } = this.state
 
-        const searchParam = {
+        // build the algolia search params
+        const searchParam: AlgoliaParam = {
           query: query,
           language: this.props.language,
           hitsPerPage: this.props.hitsPerPage,
           type: 'address',
         }
-
         if (userCoord) searchParam.aroundLatLng = userCoord
 
+        // await result
         const { hits } = await this._places.search(searchParam)
 
+        // if the search param have changed since the async call, ignore
         if (query !== this.state.query) return
 
         this.setState({ pending: false, hits })
@@ -115,7 +120,6 @@ export const withAlgoliaPlaces = ({
           <C
             {...this.props}
             {...this.state}
-            onChange={this.onChange}
             onQueryChange={this.onQueryChange}
           />
         )
