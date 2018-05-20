@@ -92,7 +92,7 @@ the hoc accepts as config:
 * `ALGOLIA_APP_ID` _: string_
 * `ALGOLIA_API_KEY` _: string_
 * `hitsPerPage` _?: number_
-* `delay` _?: delay_ debounce delay on the `onFilterChange`, default to 100 ( ms )
+* `delay` _?: number_ : debounce delay on the `onFilterChange`, default to 100 ( ms )
 
 The component accepts as props:
 
@@ -103,7 +103,7 @@ The hoc injects as props:
 * `pending` _: boolean_
 * `query` _: string_
 * `filters` _: string | null_
-* `hits` _: Hit[]_ hit is whatever is in your index
+* `hits` _: Hit[]_ : hit is whatever is in your index
 * `nbHits` _: number_
 * `haveMore` _: boolean_
 * `onQueryChange` _: (query: string ) => void_
@@ -116,13 +116,13 @@ the hoc accepts as config:
 * `ALGOLIA_APP_ID` _: string_
 * `ALGOLIA_API_KEY` _: string_
 * `hitsPerPage` _?: number_
-* `delay` _?: delay_ debounce delay on the `onFilterChange`, default to 100 ( ms )
-* `useDeviceLocation` _?: boolean_ request device location permission to narrow the search
-* `language` _?: string_ language of the search, default to 'en'
+* `delay` _?: number_ : debounce delay on the `onFilterChange`, default to 100 ( ms )
+* `useDeviceLocation` _?: boolean_ : request device location permission to narrow the search
+* `language` _?: string_ : language of the search, default to 'en'
 
 The hoc injects as props:
 
 * `pending` _: boolean_
 * `query` _: string_
-* `hits` _: Hit[]_ hit is whatever is in your index
+* `hits` _: Hit[]_ : addresses, as returned by Algolia search, consider using the parseAddress function to have consistent structure.
 * `onQueryChange` _: (query: string ) => void_
