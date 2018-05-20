@@ -4,6 +4,9 @@ Simple higher order component to use with [algolia search engine](https://www.al
 
 Also works great with [algolia places](https://blog.algolia.com/introducing-algolia-places/).
 
+[![wercker status](https://app.wercker.com/status/4b949ba4e60c87ba8603ab294528c726/s/master 'wercker status')](https://app.wercker.com/project/byKey/4b949ba4e60c87ba8603ab294528c726)
+[![npm](https://img.shields.io/npm/v/react-algolia-hoc.svg)](https://www.npmjs.com/package/react-algolia-hoc)
+
 # Demo
 
 Some examples with fancy styling
