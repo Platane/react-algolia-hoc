@@ -30,6 +30,7 @@ build:
 deploy-pages:
   steps:
     - takuma7/gh-pages:
+        silent: true
         token: $GH_TOKEN
         basedir: gh-pages
 
