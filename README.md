@@ -11,13 +11,13 @@ Also works great with [algolia places](https://blog.algolia.com/introducing-algo
 
 Some examples with fancy styling
 
-* [search movies](https://platane.github.io/react-algolia-hoc/search-basic.html)
-* [search address](https://platane.github.io/react-algolia-hoc/places-basic.html)
+* [search movies](https://platane.github.io/react-algolia-hoc/search-fancy.html)
+* [search address](https://platane.github.io/react-algolia-hoc/places-fancy.html)
 
 ... or others more bare bone with less noise.
 
-* [search movies basic](https://platane.github.io/react-algolia-hoc/search-fancy.html)
-* [search address basic](https://platane.github.io/react-algolia-hoc/places-fancy.html)
+* [search movies basic](https://platane.github.io/react-algolia-hoc/search-basic.html)
+* [search address basic](https://platane.github.io/react-algolia-hoc/places-basic.html)
 
 # Motivation
 
