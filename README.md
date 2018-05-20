@@ -1,8 +1,8 @@
 # react-algolia-hoc
 
-Simple higher order component to use with [algolia search engine](https://www.algolia.com/).
+Simple higher order component to use with [Algolia search engine](https://www.algolia.com/).
 
-Also works great with [algolia places](https://blog.algolia.com/introducing-algolia-places/).
+Also works great with [Algolia Places](https://blog.algolia.com/introducing-algolia-places/).
 
 [![wercker status](https://app.wercker.com/status/4b949ba4e60c87ba8603ab294528c726/s/master 'wercker status')](https://app.wercker.com/project/byKey/4b949ba4e60c87ba8603ab294528c726)
 [![npm](https://img.shields.io/npm/v/react-algolia-hoc.svg)](https://www.npmjs.com/package/react-algolia-hoc)
@@ -26,8 +26,8 @@ Algolia provides an awesome library of component to build on top of their API.
 This is a great option to consider, but you may want to use just what you need.
 
 > Also you might find the module hard to integrate with your tool chain.
-
-> Especially algolia places which bundles a lot of stuff ( including a version of jQuery, :{ ). Pretty bad for ssr.
+>
+> Especially algolia places which bundles a lot of stuff ( including a version of jQuery :{ ). Pretty bad for ssr.
 
 # Usage
 
@@ -58,7 +58,7 @@ const config = {
 const StateFulApp = withAlgolia(config)(App)
 ```
 
-# Advanced usage
+# Advanced Usage
 
 **request status**
 
